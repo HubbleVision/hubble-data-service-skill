@@ -10,17 +10,6 @@
 
 ---
 
-## 认证
-
-```bash
-BASE="https://your-api-host"
-AUTH=(-H "X-API-Key: YOUR_API_KEY" -H "Content-Type: application/json")
-```
-
-所有请求需携带 `X-API-Key` 请求头。
-
----
-
 ## 代码格式速查
 
 代码格式错误是最常见的问题。不同类型的接口使用不同的参数名和格式：
