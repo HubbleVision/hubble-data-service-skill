@@ -86,20 +86,7 @@ npx skills add HubbleVision/hubble-data-service-skill -a claude-code -a cursor
 npx skills add HubbleVision/hubble-data-service-skill -g
 ```
 
-### Configure API Key
-
-After installation, configure your API credentials.
-
-**Claude Code**: edit `~/.claude/settings.json` or project `.claude/settings.json`:
-
-```json
-{
-  "env": {
-    "MARKET_API_BASE_URL": "https://your-api-host",
-    "MARKET_API_KEY": "your-api-key"
-  }
-}
-```
+> **Ready to use**: API endpoint and key are built into each Skill — no extra configuration needed after installation.
 
 ### Verify Installation
 
