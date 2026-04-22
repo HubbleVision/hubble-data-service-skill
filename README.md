@@ -2,11 +2,136 @@
   <img src="Hubble_All Black.png" alt="Hubble" width="200">
 </p>
 
-# Hubble Data Service
+<p align="center">
+  <a href="README.md">中文</a> · <a href="README.en.md">English</a>
+</p>
 
-金融市场数据 API，覆盖 A股、港股、美股、加密货币、基金、大宗商品及全球指数。
+# Hubble Data Service Skill
 
-**所有接口均为 V2 版本（`/api/v2/...`）。**
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-Compatible-green)](https://openclaw.dev)
+[![npx skills](https://img.shields.io/badge/npx%20skills-installable-orange)](https://www.npmjs.com/package/skills)
+
+> 金融市场数据 Skill，让 AI Coding Agent 直接获取行情、K线、技术指标、研报数据。
+> 支持 Claude Code、Cursor、OpenClaw 等 41+ Agent。
+
+覆盖 **A股、港股、美股、加密货币、基金、大宗商品及全球指数**，共 19 个模块化 Skill + 1 个智能路由器。
+
+---
+
+## 这是什么？
+
+这是一个 **Agent Skill 集合**——让 AI 编程助手（Claude Code、Cursor、OpenClaw 等）能够直接查询金融市场数据。
+
+装上之后，你可以这样和 Agent 对话：
+
+```
+> 查一下茅台今天的行情
+> BTC 最近资金费率怎么样
+> 给我分析一下苹果的技术面，RSI、MACD、布林带
+> 生成一份特斯拉的深度研报
+> 港股通今天北向资金流向
+```
+
+Agent 会自动调用对应的 API 拿到真实数据，而不是凭空编造。
+
+### 覆盖的数据
+
+| 市场 | 实时行情 | K线 | 基础/财务数据 | 特色功能 |
+|------|:--------:|:---:|:------------:|----------|
+| A股 | ✅ | ✅ | ✅ | 涨跌停、沪深港通、融资融券、申万行业、宏观经济 |
+| 港股 | ✅ | ✅ | ✅ | 港股通持仓、港股通 Top10 |
+| 美股 | ✅ | ✅ | ✅ | 财报电话会议、期权链、内部人士交易 |
+| 加密货币 | ✅ | ✅ | — | 持仓量、爆仓、资金费率、多空比、巨鲸追踪、ETF |
+| 跨市场 | — | — | — | 27种技术指标（RSI/MACD/KDJ/BOLL 等） |
+| 基金 | — | — | ✅ | 净值、持仓、分红 |
+| 大宗商品 | — | ✅ | — | 黄金、原油、天然气、铜、铝 |
+| 全球指数 | — | ✅ | — | SPX、DJI、上证、恒指等 |
+
+---
+
+## 安装
+
+### 一键安装（推荐）
+
+```bash
+npx skills add HubbleVision/hubble-data-service-skill
+```
+
+安装后，19 个 Skill 会自动注册到你的 Agent（Claude Code → `.claude/skills/`，Cursor → `.agents/skills/`，等等）。
+
+### 选择性安装
+
+```bash
+# 只装 A股K线
+npx skills add HubbleVision/hubble-data-service-skill --skill cn-kline
+
+# 只装加密货币相关
+npx skills add HubbleVision/hubble-data-service-skill --skill crypto-market --skill crypto-indicators
+
+# 只装 A股 + 港股实时行情
+npx skills add HubbleVision/hubble-data-service-skill --skill cn-realtime-quote --skill hk-realtime-quote
+```
+
+### 指定 Agent 安装
+
+```bash
+# 只装到 Claude Code
+npx skills add HubbleVision/hubble-data-service-skill -a claude-code
+
+# 装到 Claude Code + Cursor
+npx skills add HubbleVision/hubble-data-service-skill -a claude-code -a cursor
+
+# 全局安装（所有项目可用）
+npx skills add HubbleVision/hubble-data-service-skill -g
+```
+
+### 配置 API Key
+
+安装完成后，需要配置 API 认证信息。
+
+**Claude Code**：编辑 `~/.claude/settings.json` 或项目 `.claude/settings.json`：
+
+```json
+{
+  "env": {
+    "MARKET_API_BASE_URL": "https://your-api-host",
+    "MARKET_API_KEY": "your-api-key"
+  }
+}
+```
+
+### 验证安装
+
+```bash
+npx skills list
+```
+
+---
+
+## Skill 列表
+
+| Skill | 说明 | 触发场景 |
+|-------|------|----------|
+| `skill-router` | 智能路由器，自动分发到对应 skill | 涉及任何金融数据的问题 |
+| `cn-realtime-quote` | A股实时行情 | "茅台现价""A股报价" |
+| `cn-kline` | A股K线 | "茅台日K""万科周线" |
+| `cn-fundamental` | A股基础/财务数据 | "茅台PE""万科财务" |
+| `cn-index` | A股指数 | "上证指数""申万行业" |
+| `cn-market` | A股市场数据 | "新股IPO""交易日历" |
+| `cn-market-mechanics` | A股市场机制 | "涨跌停""停复牌""大宗交易" |
+| `hk-realtime-quote` | 港股实时行情 | "腾讯现价""港股报价" |
+| `hk-kline` | 港股K线 | "腾讯日K""港股K线" |
+| `hk-fundamental` | 港股基础数据 | "腾讯财报""港股公司信息" |
+| `hk-market` | 港股市场数据 | "港股通""交易日历" |
+| `hk-connect` | 港股通 | "北向资金""港股通持仓" |
+| `us-realtime-quote` | 美股实时行情 | "AAPL price""特斯拉现价" |
+| `us-kline` | 美股K线 | "苹果日K""英伟达周线" |
+| `us-fundamental` | 美股基础/财务数据 | "AAPL PE""特斯拉财报" |
+| `us-market` | 美股市场数据 | "美股IPO""财报日历" |
+| `crypto-market` | 加密货币全量数据 | "BTC""资金费率""爆仓" |
+| `crypto-indicators` | 加密货币指标 | "恐惧贪婪指数""AHR999" |
+| `cross-market-indicators` | 27种技术指标 | "RSI""MACD""布林带" |
 
 ---
 

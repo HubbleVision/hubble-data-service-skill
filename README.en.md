@@ -2,11 +2,136 @@
   <img src="Hubble_All Black.png" alt="Hubble" width="200">
 </p>
 
-# Hubble Data Service
+<p align="center">
+  <a href="README.md">中文</a> · <a href="README.en.md">English</a>
+</p>
 
-Financial market data API covering A-shares, HK stocks, US stocks, crypto, funds, commodities, and global indices.
+# Hubble Data Service Skill
 
-**All endpoints are V2 (`/api/v2/...`).**
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
+[![OpenClaw](https://img.shields.io/badge/OpenClaw-Compatible-green)](https://openclaw.dev)
+[![npx skills](https://img.shields.io/badge/npx%20skills-installable-orange)](https://www.npmjs.com/package/skills)
+
+> Financial market data Skills for AI Coding Agents — quotes, K-lines, technical indicators, and research reports.
+> Supports Claude Code, Cursor, OpenClaw, and 41+ agents.
+
+Covering **A-shares, HK stocks, US stocks, crypto, funds, commodities, and global indices** — 19 modular Skills + 1 intelligent router.
+
+---
+
+## What is this?
+
+A collection of **Agent Skills** that let AI coding assistants (Claude Code, Cursor, OpenClaw, etc.) query real-time financial market data.
+
+Once installed, you can talk to your agent like this:
+
+```
+> What's Moutai's price today?
+> How's BTC funding rate lately?
+> Analyze Apple's technicals — RSI, MACD, Bollinger Bands
+> Generate a deep research report on Tesla
+> What's the northbound capital flow today?
+```
+
+The agent will call the corresponding API and return real data — no hallucination.
+
+### Data Coverage
+
+| Market | Realtime Quotes | K-lines | Fundamentals | Highlights |
+|--------|:--------------:|:-------:|:------------:|------------|
+| A-shares | ✅ | ✅ | ✅ | Limit up/down, Stock Connect, Margin, Shenwan Industry, Macro |
+| HK Stocks | ✅ | ✅ | ✅ | Stock Connect holdings, Top 10 |
+| US Stocks | ✅ | ✅ | ✅ | Earnings calls, Options chain, Insider trading |
+| Crypto | ✅ | ✅ | — | Open Interest, Liquidation, Funding Rate, Long/Short, Whale tracking, ETF |
+| Cross-market | — | — | — | 27 technical indicators (RSI/MACD/KDJ/BOLL etc.) |
+| Funds | — | — | ✅ | NAV, Holdings, Dividends |
+| Commodities | — | ✅ | — | Gold, Oil, Natural Gas, Copper, Aluminum |
+| Global Indices | — | ✅ | — | SPX, DJI, SSE, HSI, etc. |
+
+---
+
+## Install
+
+### One-click Install (Recommended)
+
+```bash
+npx skills add HubbleVision/hubble-data-service-skill
+```
+
+All 19 Skills will be automatically registered to your agent (Claude Code → `.claude/skills/`, Cursor → `.agents/skills/`, etc.).
+
+### Selective Install
+
+```bash
+# A-share K-lines only
+npx skills add HubbleVision/hubble-data-service-skill --skill cn-kline
+
+# Crypto only
+npx skills add HubbleVision/hubble-data-service-skill --skill crypto-market --skill crypto-indicators
+
+# A-share + HK realtime quotes
+npx skills add HubbleVision/hubble-data-service-skill --skill cn-realtime-quote --skill hk-realtime-quote
+```
+
+### Target Specific Agent
+
+```bash
+# Claude Code only
+npx skills add HubbleVision/hubble-data-service-skill -a claude-code
+
+# Claude Code + Cursor
+npx skills add HubbleVision/hubble-data-service-skill -a claude-code -a cursor
+
+# Global install (available across all projects)
+npx skills add HubbleVision/hubble-data-service-skill -g
+```
+
+### Configure API Key
+
+After installation, configure your API credentials.
+
+**Claude Code**: edit `~/.claude/settings.json` or project `.claude/settings.json`:
+
+```json
+{
+  "env": {
+    "MARKET_API_BASE_URL": "https://your-api-host",
+    "MARKET_API_KEY": "your-api-key"
+  }
+}
+```
+
+### Verify Installation
+
+```bash
+npx skills list
+```
+
+---
+
+## Skill List
+
+| Skill | Description | Trigger Examples |
+|-------|-------------|------------------|
+| `skill-router` | Intelligent router, dispatches to the right skill | Any financial data question |
+| `cn-realtime-quote` | A-share realtime quotes | "Moutai price" "A-share quotes" |
+| `cn-kline` | A-share K-lines | "Moutai daily K" "Vanke weekly" |
+| `cn-fundamental` | A-share fundamentals & financials | "Moutai PE" "Vanke financials" |
+| `cn-index` | A-share indices | "SSE index" "Shenwan industry" |
+| `cn-market` | A-share market data | "IPO calendar" "trading calendar" |
+| `cn-market-mechanics` | A-share market mechanics | "Limit up/down" "suspension" "block trade" |
+| `hk-realtime-quote` | HK stock realtime quotes | "Tencent price" "HK quotes" |
+| `hk-kline` | HK stock K-lines | "Tencent daily K" "HK K-lines" |
+| `hk-fundamental` | HK stock fundamentals | "Tencent earnings" "HK company info" |
+| `hk-market` | HK stock market data | "Stock Connect" "trading calendar" |
+| `hk-connect` | HK Stock Connect | "Northbound flow" "Connect holdings" |
+| `us-realtime-quote` | US stock realtime quotes | "AAPL price" "Tesla quote" |
+| `us-kline` | US stock K-lines | "Apple daily K" "Nvidia weekly" |
+| `us-fundamental` | US stock fundamentals & financials | "AAPL PE" "Tesla earnings" |
+| `us-market` | US stock market data | "US IPO" "earnings calendar" |
+| `crypto-market` | Crypto full market data | "BTC" "funding rate" "liquidation" |
+| `crypto-indicators` | Crypto indicators | "Fear & Greed" "AHR999" |
+| `cross-market-indicators` | 27 technical indicators | "RSI" "MACD" "Bollinger Bands" |
 
 ---
 
