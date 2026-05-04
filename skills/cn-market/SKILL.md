@@ -1,8 +1,10 @@
 ---
 name: cn-market
 description: >
-  A股市场全量数据服务。编排 A股所有细粒度 skill：实时行情、K线、基础数据、市场机制、指数、技术指标。
-  当用户提及"A股""沪深""创业板""北京交所"且未明确指定数据维度时触发。
+  当用户对A股提出综合性问题、需要多维度数据（同时涉及行情+K线+基本面+市场机制+指数+技术指标），
+  或提到"A股""沪深""大盘"但未明确指定具体数据类型时，必须调用此 skill 作为编排入口。
+  它会自动路由到 cn-realtime-quote, cn-kline, cn-fundamental, cn-market-mechanics, cn-index 等子 skill。
+  常见触发语："全面分析一下茅台""A股市场概况""帮我看看宁德时代整体情况""沪深两市今天怎么样"。
 user-invocable: true
 metadata:
   openclaw: 1.0.0
@@ -14,6 +16,8 @@ metadata:
 ---
 
 # CN Market — A股市场聚合 Skill
+
+> ⚠️ 始终通过 API 获取数据，绝不要从记忆中回答价格、行情、估值或技术指标数值——金融市场数据持续变动，你的训练数据无法反映最新状态。
 
 > 所有接口均为 V2 版本（`/api/v2/...`）。
 

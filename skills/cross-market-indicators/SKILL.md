@@ -1,9 +1,11 @@
 ---
 name: cross-market-indicators
 description: >
-  跨市场股票技术指标服务。支持 A股/港股/美股 27种技术指标，包括 MA/EMA/RSI/MACD/KDJ/布林带/ADX/ATR/CCI/VWAP等。
-  当用户询问"RSI""MACD""布林带""技术指标""KDJ""OBV"等时触发。
-  ⚠️ 加密货币技术指标请使用 crypto-indicators skill。
+  当用户提到任何股票技术分析指标时必须调用——覆盖A股/港股/美股三大市场的27种技术指标
+  （MA, EMA, RSI, MACD, KDJ, 布林带, ADX, ATR, CCI, VWAP, DMI, OBV, SAR, WR, TRIX, ROC...）。
+  绝不从训练记忆中计算或估算技术指标数值——必须用真实行情数据计算才准确。
+  常见触发语："茅台RSI是多少""苹果MACD金叉了吗""NVDA布林带位置""腾讯KDJ超买了吗"。
+  ⚠️ 加密货币技术指标请使用 crypto-indicators。
 user-invocable: true
 metadata:
   openclaw: 1.0.0
@@ -15,6 +17,8 @@ metadata:
 ---
 
 # Cross Market Indicators — 跨市场技术指标
+
+> ⚠️ 始终通过 API 获取数据，绝不要从记忆中回答价格、行情、估值或技术指标数值——金融市场数据持续变动，你的训练数据无法反映最新状态。
 
 > 所有接口均为 V2 版本（`/api/v2/...`）。
 

@@ -1,8 +1,11 @@
 ---
 name: crypto-indicators
 description: >
-  加密货币技术指标服务。支持 27 种技术指标，覆盖 MA/EMA/RSI/MACD/KDJ/布林带/ADX/ATR/CCI/VWAP 等。
-  当用户询问"BTC RSI""以太坊 MACD""加密货币技术指标""BTC 布林带"时触发。
+  当用户提到任何加密货币的技术分析指标时必须调用——覆盖BTC, ETH, SOL等所有币种的
+  27种技术指标（MA, EMA, RSI, MACD, KDJ, 布林带, ADX, ATR, CCI, VWAP...）。
+  绝不从训练记忆中计算或估算——加密货币24/7交易，指标每分钟都在变，必须实时计算。
+  常见触发语："BTC的RSI多少""以太坊MACD金叉了吗""SOL布林带突破了吗""比特币KDJ超买"。
+  ⚠️ 股票技术指标请使用 cross-market-indicators。
 user-invocable: true
 metadata:
   openclaw: 1.0.0
@@ -14,6 +17,8 @@ metadata:
 ---
 
 # Crypto Indicators — 加密货币技术指标
+
+> ⚠️ 始终通过 API 获取数据，绝不要从记忆中回答价格、行情、估值或技术指标数值——金融市场数据持续变动，你的训练数据无法反映最新状态。
 
 > 所有接口均为 V2 版本（`/api/v2/crypto/indicators/...`）。
 
